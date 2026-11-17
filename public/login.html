@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Log In | RecipeShare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<style>
+.login-page {
+min-height: 75vh;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 70px 20px;
+background: #f7f6f2;
+}
+
+.login-container {
+width: 100%;
+max-width: 440px;
+background: #fff;
+padding: 45px;
+border-radius: 12px;
+box-shadow: 0 8px 35px rgba(0,0,0,0.06);
+}
+
+.login-container .eyebrow {
+text-align: center;
+}
+
+.login-container h1 {
+font-family: 'Playfair Display', serif;
+font-size: 38px;
+text-align: center;
+margin: 12px 0;
+}
+
+.login-description {
+text-align: center;
+color: #666;
+margin-bottom: 30px;
+line-height: 1.6;
+}
+
+.login-container label {
+display: block;
+font-family: 'DM Sans', sans-serif;
+font-weight: 600;
+margin-bottom: 8px;
+}
+
+.login-container input {
+width: 100%;
+padding: 13px 15px;
+margin-bottom: 22px;
+border: 1px solid #ddd;
+border-radius: 6px;
+font-family: 'DM Sans', sans-serif;
+font-size: 15px;
+box-sizing: border-box;
+}
+
+.login-container input:focus {
+outline: 2px solid #435b48;
+outline-offset: 1px;
+}
+
+.login-container button {
+width: 100%;
+padding: 14px;
+background: #435b48;
+color: white;
+border: none;
+border-radius: 6px;
+font-family: 'DM Sans', sans-serif;
+font-size: 15px;
+font-weight: 600;
+cursor: pointer;
+}
+
+.login-container button:hover {
+background: #344739;
+}
+
+.login-footer {
+text-align: center;
+margin-top: 25px;
+font-size: 14px;
+}
+
+.login-footer a {
+color: #435b48;
+font-weight: 600;
+}
+</style>
+</head>
+<body>
+
+<header class="site-header magazine-header">
+<a class="brand" href="/">Recipe<span>Share.</span></a>
+<nav aria-label="Main navigation">
+<a href="/">Home</a>
+<a href="/search.html">Explore Recipes</a>
+<a href="/submit.html">Share a Recipe</a>
+<a href="/login.html" aria-current="page">Log In</a>
+<a href="/signup.html">Sign Up</a>
+</nav>
+</header>
+
+<main class="login-page">
+<div class="login-container">
+<p class="eyebrow">WELCOME BACK</p>
+<h1>Good to see you again.</h1>
+<p class="login-description">Log in to share your favorite recipes and discover something delicious.</p>
+
+<form action="/api/auth/login" method="POST">
+<label for="email">Email Address</label>
+<input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+<label for="password">Password</label>
+<input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+<button type="submit">Log In</button>
+</form>
+
+<p class="login-footer">New to RecipeShare? <a href="/signup.html">Create an account</a></p>
+</div>
+</main>
+
+<footer class="magazine-footer">
+<p>Recipe<span>Share.</span></p>
+<p>Made for people who love good food.</p>
+</footer>
+
+</body>
+</html>

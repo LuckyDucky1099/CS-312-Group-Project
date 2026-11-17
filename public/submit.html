@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Share a Recipe | Recipe Share</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+
+<style>
+.account-nav {
+display: inline-flex;
+align-items: center;
+gap: 28px;
+}
+
+.account-username {
+font-family: 'DM Sans', sans-serif;
+font-size: inherit;
+font-weight: 600;
+color: inherit;
+white-space: nowrap;
+}
+
+.account-nav a {
+white-space: nowrap;
+}
+
+.account-nav[hidden] {
+display: none;
+}
+</style>
+</head>
+<body>
+
+<header class="site-header magazine-header">
+<a class="brand" href="/">Recipe<span>Share.</span></a>
+<nav aria-label="Main navigation">
+<a href="/">Home</a>
+<a href="/search.html">Explore Recipes</a>
+<a href="/submit.html" aria-current="page">Share a Recipe</a>
+
+<span id="account-links" class="account-nav" hidden>
+<a href="/login.html">Log In</a>
+<a href="/signup.html">Sign Up</a>
+</span>
+
+<span id="user-links" class="account-nav" hidden>
+<span id="welcome-user" class="account-username"></span>
+<a href="/api/auth/logout">Log Out</a>
+</span>
+</nav>
+</header>
+
+<main class="submission-main">
+
+<section class="submission-intro">
+<p class="eyebrow">FROM YOUR KITCHEN TO OURS</p>
+<h1>Share something <em>delicious.</em></h1>
+<p>Every great recipe deserves to be shared. Add your favorite dish and inspire someone else's next meal.</p>
+</section>
+
+<section class="submission-layout">
+
+<div class="submission-form-container">
+
+<form id="recipe-form" class="recipe-form magazine-recipe-form">
+
+<div class="form-section-heading">
+<span class="form-section-number">01</span>
+<div>
+<h2>Tell us about your dish</h2>
+<p>Start with the basics.</p>
+</div>
+</div>
+
+<div class="field">
+<label for="title">Recipe Name *</label>
+<input type="text" id="title" name="title" placeholder="e.g. Grandma's Homemade Lasagna" required maxlength="150">
+</div>
+
+<div class="field">
+<label for="description">Description *</label>
+<textarea id="description" name="description" rows="4" placeholder="What makes this recipe special?" required></textarea>
+</div>
+
+<div class="form-row">
+<div class="field">
+<label for="cuisine">Cuisine *</label>
+<select id="cuisine" name="cuisine" required>
+<option value="">Select cuisine</option>
+<option value="American">American</option>
+<option value="Italian">Italian</option>
+<option value="Mexican">Mexican</option>
+<option value="Asian">Asian</option>
+<option value="Mediterranean">Mediterranean</option>
+<option value="Indian">Indian</option>
+<option value="Other">Other</option>
+</select>
+</div>
+
+<div class="field">
+<label for="mealType">Meal Type *</label>
+<select id="mealType" name="mealType" required>
+<option value="">Select meal type</option>
+<option value="Breakfast">Breakfast</option>
+<option value="Lunch">Lunch</option>
+<option value="Dinner">Dinner</option>
+<option value="Dessert">Dessert</option>
+<option value="Snack">Snack</option>
+</select>
+</div>
+</div>
+
+<div class="form-divider"></div>
+
+<div class="form-section-heading">
+<span class="form-section-number">02</span>
+<div>
+<h2>Ingredients & Instructions</h2>
+<p>The details that bring your recipe to life.</p>
+</div>
+</div>
+
+<div class="field">
+<label for="ingredients">Ingredients *</label>
+<p class="field-hint">Enter one ingredient per line.</p>
+<textarea id="ingredients" name="ingredients" rows="7" placeholder="2 cups flour&#10;1 cup milk&#10;2 eggs&#10;1 tsp vanilla extract" required></textarea>
+</div>
+
+<div class="field">
+<label for="instructions">Cooking Instructions *</label>
+<p class="field-hint">Enter each cooking step on a new line.</p>
+<textarea id="instructions" name="instructions" rows="8" placeholder="Preheat your oven.&#10;Combine the ingredients.&#10;Mix until smooth.&#10;Bake until golden brown." required></textarea>
+</div>
+
+<div class="form-divider"></div>
+
+<div class="form-section-heading">
+<span class="form-section-number">03</span>
+<div>
+<h2>Finishing touches</h2>
+<p>A few more details to help others make your dish.</p>
+</div>
+</div>
+
+<div class="form-row">
+<div class="field">
+<label for="cookTime">Cooking Time (minutes) *</label>
+<input type="number" id="cookTime" name="cookTime" min="1" max="1440" placeholder="e.g. 45" required>
+</div>
+
+<div class="field">
+<label for="servings">Servings *</label>
+<input type="number" id="servings" name="servings" min="1" max="100" placeholder="e.g. 4" required>
+</div>
+</div>
+
+<div class="field">
+<label for="difficulty">Difficulty *</label>
+<select id="difficulty" name="difficulty" required>
+<option value="">Select difficulty</option>
+<option value="Easy">Easy</option>
+<option value="Medium">Medium</option>
+<option value="Hard">Hard</option>
+</select>
+</div>
+
+<fieldset class="field">
+<legend>Dietary Preferences</legend>
+<p class="field-hint">Select any that apply.</p>
+<div class="dietary-options">
+<label><input type="checkbox" name="dietaryTags" value="Vegetarian"> Vegetarian</label>
+<label><input type="checkbox" name="dietaryTags" value="Vegan"> Vegan</label>
+<label><input type="checkbox" name="dietaryTags" value="Gluten-Free"> Gluten-Free</label>
+<label><input type="checkbox" name="dietaryTags" value="Dairy-Free"> Dairy-Free</label>
+</div>
+</fieldset>
+
+<div class="field">
+<label for="photo">Recipe Photo (Optional)</label>
+<p class="field-hint">Choose a photo of your finished dish. Photo uploading will be available once the backend supports it.</p>
+<input type="file" id="photo" name="photo" accept="image/*">
+</div>
+
+<div class="form-divider"></div>
+
+<div class="submission-actions">
+<button type="submit" class="magazine-submit-button">Publish Recipe</button>
+<button type="reset" class="magazine-reset-button">Clear Form</button>
+</div>
+
+<p id="form-status" class="status" role="status" aria-live="polite"></p>
+
+</form>
+</div>
+
+<aside class="submission-sidebar">
+<div class="submission-tip-card">
+<p class="eyebrow">A LITTLE INSPIRATION</p>
+<h2>Good food is meant to be shared.</h2>
+<p>Whether it's a family tradition or something new you've created, every recipe has a place here.</p>
+</div>
+
+<div class="submission-photo-card">
+<img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=800&q=85" alt="Fresh ingredients arranged on a table">
+</div>
+</aside>
+
+</section>
+
+</main>
+
+<footer class="magazine-footer">
+<p>Recipe<span>Share.</span></p>
+<p>Made for people who love good food.</p>
+</footer>
+
+<script src="/js/submit.js"></script>
+
+<script>
+async function updateAccountNavigation() {
+const accountLinks = document.getElementById('account-links');
+const userLinks = document.getElementById('user-links');
+const welcomeUser = document.getElementById('welcome-user');
+
+try {
+const response = await fetch('/api/auth/me', {
+credentials: 'same-origin',
+cache: 'no-store'
+});
+
+if (!response.ok) {
+throw new Error('Unable to check login status');
+}
+
+const data = await response.json();
+
+if (data.user) {
+welcomeUser.textContent = 'Hi, ' + data.user.username;
+userLinks.hidden = false;
+accountLinks.hidden = true;
+} else {
+accountLinks.hidden = false;
+userLinks.hidden = true;
+}
+} catch (error) {
+console.error('Account status error:', error);
+accountLinks.hidden = false;
+userLinks.hidden = true;
+}
+}
+
+updateAccountNavigation();
+</script>
+
+</body>
+</html>

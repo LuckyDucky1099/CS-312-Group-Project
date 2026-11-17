@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Explore Recipes | Recipe Share</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/css/styles.css">
+
+<style>
+.account-nav {
+display: inline-flex;
+align-items: center;
+gap: 28px;
+}
+
+.account-username {
+font-family: 'DM Sans', sans-serif;
+font-size: inherit;
+font-weight: 600;
+color: inherit;
+white-space: nowrap;
+}
+
+.account-nav a {
+white-space: nowrap;
+}
+
+.account-nav[hidden] {
+display: none;
+}
+</style>
+</head>
+
+<body>
+
+<header class="site-header magazine-header">
+<a class="brand" href="/">Recipe<span>Share.</span></a>
+
+<nav aria-label="Main navigation">
+<a href="/">Home</a>
+<a href="/search.html" aria-current="page">Explore Recipes</a>
+<a href="/submit.html">Share a Recipe</a>
+
+<span id="account-links" class="account-nav" hidden>
+<a href="/login.html">Log In</a>
+<a href="/signup.html">Sign Up</a>
+</span>
+
+<span id="user-links" class="account-nav" hidden>
+<span id="welcome-user" class="account-username"></span>
+<a href="/api/auth/logout">Log Out</a>
+</span>
+</nav>
+</header>
+
+<main class="explore-main">
+
+<section class="explore-hero">
+<div class="explore-hero-content">
+<p class="eyebrow">FIND YOUR NEXT FAVORITE</p>
+<h1>What are we <em>cooking today?</em></h1>
+<p>From comforting classics to exciting new flavors, discover recipes made to inspire your next meal.</p>
+</div>
+
+<div class="explore-hero-image">
+<img
+src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1000&q=85"
+alt="Freshly prepared food">
+</div>
+</section>
+
+<section class="explore-search-section">
+
+<div class="explore-section-heading">
+<p class="eyebrow">EXPLORE THE COLLECTION</p>
+<h2>Find a recipe you'll love</h2>
+<p>Search by name, ingredients, cuisine, or meal type.</p>
+</div>
+
+<form id="search-form" class="search-panel magazine-search-panel" role="search">
+
+<div class="field field--wide">
+<label for="q">Recipe Name</label>
+<input
+id="q"
+name="q"
+type="search"
+maxlength="100"
+placeholder="Try pasta, tacos, pancakes..."
+autocomplete="off">
+</div>
+
+<div class="field">
+<label for="ingredient">Ingredient</label>
+<input
+id="ingredient"
+name="ingredient"
+type="text"
+maxlength="100"
+placeholder="e.g. garlic, chicken, tomatoes"
+autocomplete="off">
+</div>
+
+<div class="field">
+<label for="cuisine">Cuisine</label>
+<select id="cuisine" name="cuisine">
+<option value="">Any cuisine</option>
+</select>
+</div>
+
+<fieldset class="field field--wide">
+<legend>Meal Type</legend>
+<p class="explore-filter-hint">Choose the type of meal you're looking for.</p>
+<div id="meal-types" class="chips"></div>
+</fieldset>
+
+<div class="actions explore-actions">
+<button type="submit" class="explore-search-button">Search Recipes</button>
+<button type="reset" class="explore-clear-button">Clear Filters</button>
+</div>
+
+</form>
+
+</section>
+
+<section class="explore-results-section" aria-label="Recipe search results">
+
+<div class="explore-results-heading">
+<div>
+<p class="eyebrow">YOUR RECIPE DISCOVERIES</p>
+<h2>Explore the Recipes</h2>
+</div>
+</div>
+
+<p id="status" class="status" role="status" aria-live="polite"></p>
+
+<div id="results" class="card-grid"></div>
+
+</section>
+
+<section class="explore-community">
+<p class="eyebrow">HAVE SOMETHING DELICIOUS TO SHARE?</p>
+<h2>Your recipe could inspire someone.</h2>
+<p>Share your favorite creations and help others discover something new.</p>
+<a href="/submit.html" class="magazine-button">Share Your Recipe</a>
+</section>
+
+</main>
+
+<footer class="magazine-footer">
+<p>Recipe<span>Share.</span></p>
+<p>Made for people who love good food.</p>
+</footer>
+
+<script type="module" src="/js/search.js"></script>
+
+<script>
+async function updateAccountNavigation() {
+const accountLinks = document.getElementById('account-links');
+const userLinks = document.getElementById('user-links');
+const welcomeUser = document.getElementById('welcome-user');
+
+try {
+const response = await fetch('/api/auth/me', {
+credentials: 'same-origin',
+cache: 'no-store'
+});
+
+if (!response.ok) {
+throw new Error('Unable to check login status');
+}
+
+const data = await response.json();
+
+if (data.user) {
+welcomeUser.textContent = 'Hi, ' + data.user.username;
+userLinks.hidden = false;
+accountLinks.hidden = true;
+} else {
+accountLinks.hidden = false;
+userLinks.hidden = true;
+}
+} catch (error) {
+console.error('Account status error:', error);
+accountLinks.hidden = false;
+userLinks.hidden = true;
+}
+}
+
+updateAccountNavigation();
+</script>
+
+</body>
+</html>
